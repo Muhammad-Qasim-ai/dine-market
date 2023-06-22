@@ -12,7 +12,8 @@ const productData = async () => {
         image,
         category,
         id,
-        _id
+        _id,
+        ref
         
        }`)
     // console.log(res);
@@ -26,7 +27,8 @@ interface IProduct {
     price: number,
     image: IImage,
     id: number,
-    _id: string
+    _id: string,
+    ref: string
 
 }
 
@@ -43,7 +45,7 @@ export default async function Female() {
                 <div className='  mx-auto 2xl:mx-[8rem] my-[8rem] sm:my-[4rem] grid sm:grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] 2xl:grid-cols-[1fr,1fr,1fr,1fr] sm:justify-between justify-center items-center gap-[4rem]'>
                     {data.map((item: any) => (
                     
-                            <a key={item.id} className=' min-w-[12.5rem] md:min-w-[15.625rem] max-w-[12.5rem] md:max-w-[15.625rem] text-[1.05rem] mx-auto font-[600] leading-[24px] text-[#212121] ' href="">
+                            <a key={item.id} className=' min-w-[12.5rem] md:min-w-[15.625rem] max-w-[12.5rem] md:max-w-[15.625rem] text-[1.05rem] mx-auto font-[600] leading-[24px] text-[#212121] ' href={item.ref}>
                                 <Image 
                         src={urlForImage(item.image).url()} 
                         alt="product" 

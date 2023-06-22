@@ -13,7 +13,8 @@ export const getproductData = async () => {
     image,
     category,
     id,
-    _id
+    _id,
+    ref
     
    }`)
    return res
@@ -25,7 +26,8 @@ export interface IProduct {
     price: number,
     image: IImage,
     id: number,
-    _id: string
+    _id: string,
+    ref: string
 
 }
 
