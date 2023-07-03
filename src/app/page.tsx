@@ -7,9 +7,12 @@ import Designer from './components/designer'
 import Letter from './components/letter'
 import Footer from './components/footer'
 
+
 export default function Home() {
   return (
     <>
+    
+
     <Navbar />
     <Hero />
     <Promo />
@@ -17,6 +20,7 @@ export default function Home() {
     <Designer />
     <Letter />
     <Footer />
+    
     </>
   )
 }
