@@ -1,9 +1,9 @@
-'use client'
+// 'use client'
 
 import Image from "next/image";
 import { client } from "@/lib/sanityClient";
 import { Image as IImage } from "sanity";
-import { urlForImage } from "../../../sanity/lib/image";
+import { urlForImage } from "../../sanity/lib/image";
 import {Cart} from './productCart'
 
 export const getproductData = async () => {

@@ -3,7 +3,7 @@ import { LuShoppingCart } from 'react-icons/lu'
 export default function Hero() {
     return (
         <>
-            <div className=" tracking-wider xl:mx-32 2md:mx-auto mx-7  2md:ml-8 my-16 flex justify-between gap-16 relative pt-14 pb-6 xl:overflow-visible overflow-hidden  k">
+            <div className=" tracking-wider 3xl:pl-[20rem] xl:mx-32 2md:mx-auto mx-7  2md:ml-8 my-16 flex justify-between gap-16 relative pt-14 pb-6 xl:overflow-visible overflow-hidden  k">
                 <div className='flex flex-col justify-between 2md:min-w-544 max-w-600'>
                     <div className='flex flex-col gap-10'>
 

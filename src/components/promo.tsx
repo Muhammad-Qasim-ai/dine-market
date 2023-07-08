@@ -3,7 +3,7 @@ import Image  from "next/image"
 export  default function Promo(){
     return (
         <>
-            <div className="flex flex-col xl:mx-28 lg:mx-2 3md:mx-7 mx-3   my-16 ">
+            <div className="3xl:pl-[20rem] flex flex-col xl:mx-28 lg:mx-2 3md:mx-7 mx-3   my-16 ">
                 <h1 className=" text-sm mb-2 text-center tracking-wider font-extrabold text-promo1 font-sora">PROMOTIONS</h1>
                 <h2 className=" tracking-wider text-center text-3xl font-extrabold ">Our Promotion Events</h2>
                 <div className=" mt-10 overflow-hidden lg:max-h-434 gap-8 flex lg:flex-row flex-col

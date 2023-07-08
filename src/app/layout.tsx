@@ -1,9 +1,12 @@
+
+
 import './globals.css'
-import Navbar from './components/navbar'
+import Navbar from '../components/navbar'
 import { Inter } from 'next/font/google'
-import Footer from './components/footer'
+import Footer from '../components/footer'
 
 const inter = Inter({ subsets: ['latin'] })
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Create Next App',

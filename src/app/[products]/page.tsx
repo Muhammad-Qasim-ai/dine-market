@@ -1,8 +1,8 @@
 'use client'
 
 import { client } from "@/lib/sanityClient"
-import Navbar from "../components/navbar"
-import Footer from "../components/footer"
+import Navbar from "../../components/navbar"
+import Footer from "../../components/footer"
 import { Image as IImage } from "sanity";
 import { urlForImage } from "../../../sanity/lib/image"
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"

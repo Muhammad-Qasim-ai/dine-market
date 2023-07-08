@@ -55,6 +55,7 @@ module.exports = {
         '2lg': '1200px',
         '1lg': '1030px',
         '2sm': '360px',
+        '3xl': '2200px',
       },
       margin: {
         '-0.85': '-0.85rem'

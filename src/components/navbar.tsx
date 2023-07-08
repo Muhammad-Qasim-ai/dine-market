@@ -14,7 +14,7 @@ import Link from 'next/link';
 export default function Navbar() {
     return(
         <>
-        <div className="hidden h-10 xl:mx-32 my-8 mx-8  lg:flex justify-between items-center">
+        <div className="hidden h-10 xl:mx-32 my-8 mx-8  lg:flex justify-between items-center ">
             <Link href="./"><img src="./logo.jpg" alt="logo" className="" /></Link>
             
             
@@ -28,10 +28,10 @@ export default function Navbar() {
                 <FiSearch className='mr-2' />
                 <input type="text" placeholder="What you looking for?" className=" text-xs" />
             </div>
-            <button className="border  rounded-full w-12 p-3 bg-cartbg h-12 flex justify-center items-center font-bold">
+            <a href={'/cart'} className="border  rounded-full w-12 p-3 bg-cartbg h-12 flex justify-center items-center font-bold">
                 <LuShoppingCart className={` text-3xl`} />
             <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>0</span>
-            </button>
+            </a>
         </div>
         <MobileNav />
         </>

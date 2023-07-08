@@ -1,7 +1,7 @@
 'use client'
 
-import Navbar from '../../components/navbar'
-import Footer from '../../components/footer'
+import Navbar from '../../../components/navbar'
+import Footer from '../../../components/footer'
 import { client } from "@/lib/sanityClient";
 import { Image as IImage } from "sanity";
 import { urlForImage } from '../../../../sanity/lib/image';
@@ -48,7 +48,7 @@ export default async function Female() {
                 <div className='  mx-auto 2xl:mx-[8rem] my-[8rem] sm:my-[4rem] grid sm:grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] 2xl:grid-cols-[1fr,1fr,1fr,1fr] sm:justify-between justify-center items-center gap-[4rem]'>
                     {data.map((item: IProduct) => (
                     
-                            <a href={item.ref} key={item.id} className=' min-w-[12.5rem] md:min-w-[15.625rem] max-w-[12.5rem] md:max-w-[15.625rem]   text-[1.05rem] mx-auto font-[600] leading-[24px] text-[#212121] '>
+                            <a href={item.ref} key={item.id} className=' border border-black min-w-[12.5rem] md:min-w-[15.625rem] max-w-[12.5rem] md:max-w-[15.625rem]   text-[1.05rem] mx-auto font-[600] leading-[24px] text-[#212121] md:min-h-[full] min-h-[331.81px]'> 
                                 <Image 
                         src={urlForImage(item.image).url()} 
                         alt="product" 

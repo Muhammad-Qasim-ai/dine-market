@@ -1,7 +1,7 @@
 export default function Designer() {
     return (
         <>
-            <div className="xl:mx-28 lg:mx-8 3md:mx-8 mx-3   my-16 ">
+            <div className="3xl:pl-[13rem] xl:mx-28 lg:mx-8 3md:mx-8 mx-3   my-16 ">
                 <div className="flex justify-end pb-[2rem] 2xl:px-[7rem]  gradientbg"><h1 className="  font-[1000] text-[2.75rem] tracking-[0.03em] text-[#212121]  w-full 2xl:w-[48%] leading-[55px]">Unique and Authentic Vintage Designer Jewellery</h1></div>
 
 

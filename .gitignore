@@ -35,8 +35,5 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
-/public
-/src/context
-/src/app/api
-/src/lib/drizzle.ts
+
 

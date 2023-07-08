@@ -1,5 +1,5 @@
-import Navbar from '../../components/navbar'
-import Footer from '../../components/footer'
+import Navbar from '../../../components/navbar'
+import Footer from '../../../components/footer'
 import { client } from "@/lib/sanityClient";
 import { Image as IImage } from "sanity";
 import { urlForImage } from '../../../../sanity/lib/image';
