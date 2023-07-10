@@ -3,6 +3,8 @@
 import { cookies } from "next/dist/client/components/headers"
 // import  Cookies  from "js-cookie";
 import { client } from "../../../sanity/lib/client"
+import Footer from "@/components/footer"
+import Navbar from "@/components/navbar"
 // import { useState } from "react"
 // import cart from '../api/cart'
 
@@ -32,7 +34,7 @@ export default async function Cart() {
         const userId = cookieStore.get('user_id')
         // console.log(userId)
 
-        const res = await fetch('../api/cart', {
+        const res = await fetch('http://localhost:3000/api/cart', {
            method: 'GET',
            
         })
@@ -80,10 +82,11 @@ export default async function Cart() {
 
         <>
             <div>           
-                aasd
+                <Navbar />
                 {productData2.map((item: IProduct) => (
                     
-                    <a href={item.ref} key={item.id} className=' border border-black min-w-[12.5rem] md:min-w-[15.625rem] max-w-[12.5rem] md:max-w-[15.625rem]   text-[1.05rem] mx-auto font-[600] leading-[24px] text-[#212121] md:min-h-[full] min-h-[331.81px]'>                    
+                    <a href={item.ref} key={item.id} className=' border border-black min-w-[12.5rem] md:min-w-[15.625rem] max-w-[12.5rem] md:max-w-[15.625rem]   text-[1.05rem] mx-auto font-[600] leading-[24px] text-[#212121] md:min-h-[full] min-h-[331.81px]'> 
+                    
                     <p className='text-[1.05rem] mt-[0.5rem] font-[600] leading-[24px] text-[#212121]'>{item.title}</p>
                     <p className='font-[600] text-[15px] leading-[15px] text-[#888] mt-[0.5rem]'>{item.category}</p>
                     <p className='text-[1.25rem] mt-4'>${item.price}.00</p>
@@ -91,6 +94,7 @@ export default async function Cart() {
                     </a>
                 
             ))}
+            <Footer />  
             </div>
         </>
     )

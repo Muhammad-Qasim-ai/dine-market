@@ -3,6 +3,13 @@ import {db, cartTable} from '@/lib/drizzle'
 import { v4 as uuid } from 'uuid'
 import { cookies } from "next/dist/client/components/headers"
 
+export const OPTIONS = {
+    // Set the allowed origin to 'http://localhost:3000' or your frontend origin
+    cors: {
+      origin: "https://dine-market-api-qasimrafiq2019-gmailcom.vercel.app/api/cart",
+    },
+  };
+
 
 export const  GET = async (request: NextRequest) => {
     const res = await db.select().from(cartTable)
