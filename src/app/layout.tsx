@@ -4,6 +4,8 @@ import './globals.css'
 import Navbar from '../components/navbar'
 import { Inter } from 'next/font/google'
 import Footer from '../components/footer'
+import { Provider } from 'react-redux'
+import {store }from '@/store/store'
 
 const inter = Inter({ subsets: ['latin'] })
 export const dynamic = 'force-dynamic'
@@ -20,11 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className=''>
-      
+      {/* <Provider store={store}> */}
+
       <body className={`${inter.className}`}>{children}
       
       
       </body>
+      {/* </Provider> */}
       
     </html>
   )

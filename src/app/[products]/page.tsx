@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 
 import { client } from "@/lib/sanityClient"
 import Navbar from "../../components/navbar"

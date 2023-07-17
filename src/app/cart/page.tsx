@@ -1,102 +1,106 @@
+"use client";
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import { IProduct } from "@/components/products";
+import { useState, useEffect } from "react";
+import { productData, result } from "./cartProducts";
+import { urlForImage } from "../../../sanity/lib/image";
+import Image from "next/image";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
+export default function Cart() {
+  const [productData2, setProductData2] = useState<IProduct[]>([]);
 
-import { cookies } from "next/dist/client/components/headers"
-// import  Cookies  from "js-cookie";
-import { client } from "../../../sanity/lib/client"
-import Footer from "@/components/footer"
-import Navbar from "@/components/navbar"
-// import { useState } from "react"
-// import cart from '../api/cart'
+  useEffect(() => {
+    result.then((filteredProductId: any) => {
+      productData(filteredProductId).then((data: IProduct[]) => {
+        setProductData2(data);
+      });
+    });
+  }, []);
 
+  return (
+    <>
+      <div>
+        <Navbar />
 
-
-interface IProduct {
-    title: string,
-        category: string,
-        price: number,
-        // image: IImage,
-        ref: string,
-        id: number,
-        _id: string
-        
-    }
-    
-    let productData2: IProduct[] = [] 
-
-export default async function Cart() {
-    
- 
-    
-
-
-    const handleAddToCart = async () => {
-        const cookieStore =  cookies()
-        const userId = cookieStore.get('user_id')
-        // console.log(userId)
-
-        const res = await fetch('http://localhost:3000/api/cart', {
-           method: 'GET',
-           
-        })
-        const result = await res.json()
-        
-        const filteredOrders = result.res.filter((order: any) => order.user_id === userId?.value)
-        const filteredProductId = filteredOrders.map((item: any) => item.product_id)
-        // console.log(filteredProductId);
-        return filteredProductId
-    }
-    const result: Promise<any> = handleAddToCart();
-
-    
-    const productData = async (product_id: string[]) => {
-        const productIds = JSON.stringify(product_id);
-        let query = `*[_type=='product' && _id in ${productIds}] {
-            title,
-            price,
-            image,
-            category,
-            id,
-            _id,
-            ref
+        <h2 className=" font-bold block text-[1.5em]  xl:mx-32 sm:mx-8 mx-4 lg:p-12 ">Shopping Cart</h2>
+        <div className="mb-16 xl:mx-32 sm:mx-8 mx-4 lg:p-12  flex md:flex-row flex-col justify-between">
+          
+          <div className="flex flex-col justify-between gap-16  -red-600 md:w-[60%] w-full">
             
-           }`
-        const res = await client.fetch(query)
-    //    console.log(product_id)
-       return res
-    }
-    
-    result.then(async (filteredProductId) => {
-      console.log(filteredProductId);
-    
-      productData2 = await productData(filteredProductId);
-      console.log(productData2);
 
-    
-    })
-    
+            
+        {productData2.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          productData2.map((item: IProduct) => (
+            <div className="sm:items-stretch items-center sm:flex-row flex-col flex gap-4  -black w-full ">
+              <Image
+                src={urlForImage(item.image).url()}
+                alt="product"
+                width={"380"}
+                height={"380"}
+                className="sm:w-[15rem] w-[11rem]  max-w-[15rem] max-h-[14rem] rounded-[9px]   "
+              />
 
+              <div className="flex flex-col justify-between w-[80%]">
+                <div className="flex justify-between">
+                  <h3 className="font-[300] text-[1.3rem] leading-[25px] text-[#212121]">
+                    {item.title}
+                  </h3>
+                  <button className=" bg-transparent">
+                    <RiDeleteBinLine />
+                  </button>
+                </div>
+                <p className="leading-[16px] text-[#666] text-[1rem] font-[600]">
+                  {item.category}
+                </p>
+                <p className="font-[600] text-[1rem] leading-[22px] text-[#212121]">
+                  Delivery Estimation
+                </p>
+                <p className="font-[600] text-[1rem] leading-[22px] text-[#ffc700]">
+                  5 Working Days
+                </p>
+                <div className="flex justify-between">
+                  <span className="font-[700] text-[1.1rem] leading-[20px] tracking-[0.1em] text-[#212121]">
+                    ${item.price}
+                  </span>
+                  <div className="flex items-center ">
+                    <AiOutlineMinus className="mr-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] " />
+                    <span className="">1</span>
+                    <AiOutlinePlus className="ml-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] -2 -black" />
+                  </div>
+                </div>
+              </div>
 
-
-
-    return (
-
-        <>
-            <div>           
-                <Navbar />
-                {productData2.map((item: IProduct) => (
-                    
-                    <a href={item.ref} key={item.id} className=' border border-black min-w-[12.5rem] md:min-w-[15.625rem] max-w-[12.5rem] md:max-w-[15.625rem]   text-[1.05rem] mx-auto font-[600] leading-[24px] text-[#212121] md:min-h-[full] min-h-[331.81px]'> 
-                    
-                    <p className='text-[1.05rem] mt-[0.5rem] font-[600] leading-[24px] text-[#212121]'>{item.title}</p>
-                    <p className='font-[600] text-[15px] leading-[15px] text-[#888] mt-[0.5rem]'>{item.category}</p>
-                    <p className='text-[1.25rem] mt-4'>${item.price}.00</p>
-
-                    </a>
-                
-            ))}
-            <Footer />  
+              
             </div>
-        </>
-    )
+          ))
+        )}
 
+          </div>
+        <div className="p-8 bg-[#fbfcff] flex flex-col flex-1 gap-8 max-w-[30rem]  min-h-[20rem] max-h-[20rem]">
+                <h3 className="text-[1.17em] ">Order Summary</h3>
+                <div className="flex space-between gap-16">
+                  <p>Quantity</p>
+                  <span>{productData2.length} Product</span>  
+                </div>
+                <div className="flex space-between gap-16">
+                  <p>Sub Total</p>
+                  <span>0</span>
+                </div>
+                <div className="flex space-between gap-16">
+                  <button className="w-full p-4 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol">
+                    Proccess to Checkout
+                  </button>
+                </div>
+              </div>
+              
+        </div>
+        <Footer />
+      </div>
+    </>
+  );
 }

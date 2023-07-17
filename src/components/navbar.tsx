@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { LuShoppingCart } from 'react-icons/lu'
 import { useState } from "react";
 import { FiSearch } from 'react-icons/fi'
@@ -10,8 +10,23 @@ import { HiMenu } from "react-icons/hi";
 import { AiOutlineArrowDown, AiOutlineClose } from "react-icons/ai";
 import { RxOpenInNewWindow} from "react-icons/rx"
 import Link from 'next/link';
+import { productData, result } from '@/app/cart/cartProducts';
+import { IProduct } from './products';
+
 
 export default function Navbar() {
+    const [cartItems, setCartItems] = useState(0)
+    
+    useEffect(() => {
+        result.then((filteredProductId: any) => {
+          productData(filteredProductId).then((data) => {
+            const cartItems2 = data.length
+            // console.log(data.length)
+            setCartItems(cartItems2);
+          });
+        });
+      }, []);
+
     return(
         <>
         <div className="hidden h-10 xl:mx-32 my-8 mx-8  lg:flex justify-between items-center ">
@@ -30,7 +45,13 @@ export default function Navbar() {
             </div>
             <a href={'/cart'} className="border  rounded-full w-12 p-3 bg-cartbg h-12 flex justify-center items-center font-bold">
                 <LuShoppingCart className={` text-3xl`} />
-            <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>0</span>
+            <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>
+                {cartItems == 0 ? (
+                    <span>0</span>
+                ) : (
+                    <span>{cartItems}</span>
+                )}
+            </span>
             </a>
         </div>
         <MobileNav />
