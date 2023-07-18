@@ -22,7 +22,7 @@ interface IProduct {
     const handleAddToCart = async () => {
         // const cookieStore =  cookies()
         const userId = Cookies.get('user_id');
-        console.log(userId)
+        // console.log(userId)
 
         const res = await fetch('http://localhost:3000/api/cart', {
            method: 'GET',
@@ -31,6 +31,8 @@ interface IProduct {
         const result = await res.json()
         
         const filteredOrders = result.res.filter((order: any) => order.user_id === userId)
+        // console.log(filteredOrders);
+        
         const filteredProductId = filteredOrders.map((item: any) => item.product_id)
         // console.log(filteredProductId);
         return filteredProductId
@@ -53,6 +55,8 @@ interface IProduct {
         const res = await client.fetch(query)
     //    console.log(product_id)
        return res
+    //    console.log(res);
+       
     }
     
     

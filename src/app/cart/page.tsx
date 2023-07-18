@@ -12,10 +12,18 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 export default function Cart() {
   const [productData2, setProductData2] = useState<IProduct[]>([]);
 
+  const subTotal = productData2.reduce((acc, item) => acc + item.price, 0);
+
   useEffect(() => {
     result.then((filteredProductId: any) => {
+        // console.log(filteredProductId);
+        
       productData(filteredProductId).then((data: IProduct[]) => {
+        // console.log(data);
+        
         setProductData2(data);
+        console.log(productData2);
+        
       });
     });
   }, []);
@@ -89,7 +97,7 @@ export default function Cart() {
                 </div>
                 <div className="flex space-between gap-16">
                   <p>Sub Total</p>
-                  <span>0</span>
+                  <span>${subTotal}</span>    
                 </div>
                 <div className="flex space-between gap-16">
                   <button className="w-full p-4 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol">

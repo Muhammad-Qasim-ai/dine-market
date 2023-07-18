@@ -61,6 +61,7 @@ export default function Navbar() {
 
 function MobileNav(){
     const [navbar, setnavbar] = useState(false)
+    const [cartItems, setCartItems] = useState(0)
 
     return (
         <>
@@ -87,7 +88,13 @@ function MobileNav(){
                    <a href='/all'>All Products</a>
                    <button className="border  rounded-full w-12 p-3 bg-cartbg h-12 flex justify-center items-center font-bold">
                 <LuShoppingCart className={` text-3xl`} />
-            <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>0</span>
+            <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>
+            {cartItems == 0 ? (
+                    <span>0</span>
+                ) : (
+                    <span>{cartItems}</span>
+                )}
+            </span>
             </button>
                </ul>     
                
