@@ -40,6 +40,11 @@ export const product = {
             to: [{
                 type: 'classification',
             }]
+        },
+        {
+            name: 'quantity',
+            title: 'Quantity',
+            type: 'number'
         }
         
     ]

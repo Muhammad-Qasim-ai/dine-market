@@ -11,7 +11,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 export default function Cart() {
   const [productData2, setProductData2] = useState<IProduct[]>([]);
-
+  let [quantity, setQuantity] = useState(1)
   const subTotal = productData2.reduce((acc, item) => acc + item.price, 0);
 
   useEffect(() => {
@@ -22,16 +22,31 @@ export default function Cart() {
         // console.log(data);
         
         setProductData2(data);
-        console.log(productData2);
         
+          
       });
     });
   }, []);
 
+  console.log(productData2);
+  
+  if(quantity < 1){
+    setQuantity(1)
+  }
+
+  const handleIncQuantity = () => {
+    setQuantity(quantity + 1)
+  }
+  const handleDecQuantity = () => {
+    setQuantity(quantity - 1)
+  }
+
+  
+
   return (
     <>
       <div>
-        <Navbar />
+        
 
         <h2 className=" font-bold block text-[1.5em]  xl:mx-32 sm:mx-8 mx-4 lg:p-12 ">Shopping Cart</h2>
         <div className="mb-16 xl:mx-32 sm:mx-8 mx-4 lg:p-12  flex md:flex-row flex-col justify-between">
@@ -43,8 +58,12 @@ export default function Cart() {
         {productData2.length === 0 ? (
           <p>Loading...</p>
         ) : (
-          productData2.map((item: IProduct) => (
-            <div className="sm:items-stretch items-center sm:flex-row flex-col flex gap-4  -black w-full ">
+          productData2.map((item: IProduct) => {
+          
+
+          return (
+            
+            <div key={item.id} className="sm:items-stretch items-center sm:flex-row flex-col flex gap-4  -black w-full "> 
               <Image
                 src={urlForImage(item.image).url()}
                 alt="product"
@@ -76,16 +95,16 @@ export default function Cart() {
                     ${item.price}
                   </span>
                   <div className="flex items-center ">
-                    <AiOutlineMinus className="mr-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] " />
-                    <span className="">1</span>
-                    <AiOutlinePlus className="ml-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] -2 -black" />
+                    <AiOutlineMinus onClick={handleDecQuantity} className="mr-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] " />
+                    <span className="">{quantity}</span>
+                    <AiOutlinePlus onClick={handleIncQuantity} className="ml-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] -2 -black" />
                   </div>
                 </div>
               </div>
 
               
             </div>
-          ))
+          )})
         )}
 
           </div>
@@ -97,7 +116,13 @@ export default function Cart() {
                 </div>
                 <div className="flex space-between gap-16">
                   <p>Sub Total</p>
-                  <span>${subTotal}</span>    
+                  {productData2.map((item: IProduct) => {
+                    const totalProductPrice = item.price * quantity
+            
+          return (
+            <span key={item.id}>{totalProductPrice}</span>
+            )
+          })}    
                 </div>
                 <div className="flex space-between gap-16">
                   <button className="w-full p-4 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol">
@@ -107,7 +132,7 @@ export default function Cart() {
               </div>
               
         </div>
-        <Footer />
+       
       </div>
     </>
   );

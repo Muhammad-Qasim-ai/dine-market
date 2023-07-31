@@ -41,7 +41,7 @@ export default async function Female() {
 
     return (
         <>
-            <Navbar />
+            
                 <div className='  mx-auto 2xl:mx-[8rem] my-[8rem] sm:my-[4rem] grid sm:grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] 2xl:grid-cols-[1fr,1fr,1fr,1fr] sm:justify-between justify-center items-center gap-[4rem]'>
                     {data.map((item: any) => (
                     
@@ -63,7 +63,7 @@ export default async function Female() {
 
 
 
-            <Footer />
+            
         </>
     )
 }

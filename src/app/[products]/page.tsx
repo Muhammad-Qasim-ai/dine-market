@@ -1,4 +1,4 @@
-// 'use client'
+
 
 import { client } from "@/lib/sanityClient"
 import Navbar from "../../components/navbar"
@@ -7,6 +7,7 @@ import { Image as IImage } from "sanity";
 import { urlForImage } from "../../../sanity/lib/image"
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { LuShoppingCart } from "react-icons/lu"
+import {Cart } from './addtoCart'
 
 
 
@@ -49,12 +50,12 @@ export default async function Products({params}:{params: {products: string} }) {
     // console.log(productData());
     
     const data: IProduct[] = await productData()
-    // console.log(data);
+    console.log(data);
     
     
     return (
         <>
-        <Navbar />
+        
             <div className="mt-[6.8rem] mb-[5rem]">
                 {data.map((item: IProduct) => (
                     <div key={item.id} className="py-[4] xl:px-[8rem] md:px-[4rem] px-4">
@@ -92,9 +93,7 @@ export default async function Products({params}:{params: {products: string} }) {
 
                                 </div>
                                 <div className="flex items-center gap-4">
-                                <button className="w-[40%] p-3 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol tracking-wider">
-                                    <LuShoppingCart className='text-2xl' />
-                                Add to Cart</button>
+                                <Cart item={item} />
                         <p className="  font-[700] text-[1.5rem] leading-[30px] tracking-[0.1em]">${item.price}.00</p>
                                 </div>
                             </div>
@@ -104,7 +103,7 @@ export default async function Products({params}:{params: {products: string} }) {
                 ))}
             </div>
 
-            <Footer />
+            
         </>
     )
 }

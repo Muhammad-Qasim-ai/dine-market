@@ -1,11 +1,5 @@
 import Cookies from "js-cookie";
-
 import { client } from "../../../sanity/lib/client"
-import Footer from "@/components/footer"
-import Navbar from "@/components/navbar"
-
-
-
 
 interface IProduct {
     title: string,
@@ -19,7 +13,7 @@ interface IProduct {
     }
     
     let productData2: IProduct[] = [] 
-    const handleAddToCart = async () => {
+    const handleCart = async () => {
         // const cookieStore =  cookies()
         const userId = Cookies.get('user_id');
         // console.log(userId)
@@ -37,7 +31,7 @@ interface IProduct {
         // console.log(filteredProductId);
         return filteredProductId
     }
-    export const result: Promise<any> = handleAddToCart();
+    export const result: Promise<any> = handleCart();
 
     
     export const productData = async (product_id: string[]) => {
@@ -53,12 +47,29 @@ interface IProduct {
             
            }`
         const res = await client.fetch(query)
-    //    console.log(product_id)
+    
        return res
-    //    console.log(res);
+    
        
     }
     
+
+    export const handleQuantity = async (quantity: number) => {
+        // const cookieStore =  cookies()
+        const userId = Cookies.get('user_id');
+        // console.log(userId)
+
+        const res = await fetch('http://localhost:3000/api/cart', {
+           method: 'PUT',
+           body: JSON.stringify({
+            quantity: quantity
+           })
+
+           
+        })
+        const result = await res.json()
+        
+    }
     
     
 

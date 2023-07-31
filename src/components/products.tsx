@@ -27,7 +27,8 @@ export interface IProduct {
     image: IImage,
     id: number,
     _id: string,
-    ref: string
+    ref: string,
+    quantity: any
 
 }
 

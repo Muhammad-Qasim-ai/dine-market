@@ -1,15 +1,15 @@
 'use client'
 
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { urlForImage } from "../../sanity/lib/image";
-import { useDispatch } from "react-redux";
-import {add} from '@/store/slice/cartSlice'
+
+
 
 
 
 export const Cart: FC<{ item: any }> = ({item}) => {
-    // const dispatch = useDispatch()
+    
     const handleAddToCart = async () => {
         const res = await fetch('http://localhost:3000/api/cart', {
            method: 'POST',
@@ -25,9 +25,7 @@ export const Cart: FC<{ item: any }> = ({item}) => {
         console.log(result);
         
     }
-    // const addToCart = (product: any) => {
-    //     dispatch(add(product))
-    // }
+   
 
    return (
     <>

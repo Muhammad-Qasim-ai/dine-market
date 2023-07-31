@@ -24,9 +24,10 @@ export default function RootLayout({
     <html lang="en" className=''>
       {/* <Provider store={store}> */}
 
-      <body className={`${inter.className}`}>{children}
-      
-      
+      <body className={`${inter.className}`}>
+      <Navbar />
+        {children}
+        <Footer />
       </body>
       {/* </Provider> */}
       

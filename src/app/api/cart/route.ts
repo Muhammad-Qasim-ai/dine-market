@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import {db, cartTable} from '@/lib/drizzle'
 import { v4 as uuid } from 'uuid'
 import { cookies } from "next/dist/client/components/headers"
+import { eq } from "drizzle-orm";
 
 export const OPTIONS = {
     // Set the allowed origin to 'http://localhost:3000' or your frontend origin
@@ -34,6 +35,8 @@ export const  GET = async (request: NextRequest) => {
         return NextResponse.json({message: 'something went wrong'})
     }
 }
+
+
 export const  POST = async (request: NextRequest) => {
     const req = await request.json()
 
@@ -54,6 +57,36 @@ export const  POST = async (request: NextRequest) => {
             quantity: 1,
             user_id: cookies().get('user_id')?.value  as string
         }).returning();
+        return NextResponse.json({ res })
+    } catch (error) {
+        
+    }
+}
+export const  PUT = async (request: NextRequest) => {
+    const req = await request.json()
+
+
+    
+
+    try {
+        const res = await db.update(cartTable).set({
+            quantity: req.quantity
+        })
+        return NextResponse.json({ res })
+    } catch (error) {
+        
+    }
+}
+export const  DELETE = async (request: NextRequest) => {
+    const req = await request.json()
+
+
+    
+
+    try {
+        const res = await db.delete(cartTable)
+        .where(eq(cartTable.product_id, req.product_id))    
+        
         return NextResponse.json({ res })
     } catch (error) {
         
