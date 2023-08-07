@@ -96,7 +96,7 @@ export default function Cart() {
                   </span>
                   <div className="flex items-center ">
                     <AiOutlineMinus onClick={handleDecQuantity} className="mr-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] " />
-                    <span className="">{quantity}</span>
+                    <span className="">{quantity  }</span>
                     <AiOutlinePlus onClick={handleIncQuantity} className="ml-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] -2 -black" />
                   </div>
                 </div>

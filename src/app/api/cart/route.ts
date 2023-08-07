@@ -38,6 +38,7 @@ export const  GET = async (request: NextRequest) => {
 
 
 export const  POST = async (request: NextRequest) => {
+
     const req = await request.json()
 
     const uid = uuid()
@@ -64,25 +65,23 @@ export const  POST = async (request: NextRequest) => {
 }
 export const  PUT = async (request: NextRequest) => {
     const req = await request.json()
-
-
+    const  user_id = cookies().get('user_id')
     
-
     try {
         const res = await db.update(cartTable).set({
-            quantity: req.quantity
+            quantity: req.quantity, 
+            // product_id: req.product_id
         })
+        .where(eq(cartTable.product_id, `${req.product_id}`) || eq(cartTable.user_id, `${user_id}`))
+        // .where())
         return NextResponse.json({ res })
     } catch (error) {
         
     }
 }
+
 export const  DELETE = async (request: NextRequest) => {
     const req = await request.json()
-
-
-    
-
     try {
         const res = await db.delete(cartTable)
         .where(eq(cartTable.product_id, req.product_id))    

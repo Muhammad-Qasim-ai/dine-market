@@ -11,7 +11,7 @@ import { urlForImage } from "../../sanity/lib/image";
 export const Cart: FC<{ item: any }> = ({item}) => {
     
     const handleAddToCart = async () => {
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('/api/cart', {
            method: 'POST',
            body: JSON.stringify({
                product_id: item._id,
