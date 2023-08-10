@@ -5,7 +5,6 @@ import { cookies } from "next/dist/client/components/headers"
 import { eq } from "drizzle-orm";
 
 export const OPTIONS = {
-    // Set the allowed origin to 'http://localhost:3000' or your frontend origin
     cors: {
       origin: "https://dine-market-api-qasimrafiq2019-gmailcom.vercel.app/api/cart",
     },
@@ -65,7 +64,7 @@ export const  POST = async (request: NextRequest) => {
 }
 export const  PUT = async (request: NextRequest) => {
     const req = await request.json()
-    const  user_id = cookies().get('user_id')
+    const  user_id = cookies().get('user_id')?.value
     
     try {
         const res = await db.update(cartTable).set({
@@ -81,10 +80,11 @@ export const  PUT = async (request: NextRequest) => {
 }
 
 export const  DELETE = async (request: NextRequest) => {
+    const user_id = cookies().get('user_id')?.value
     const req = await request.json()
     try {
         const res = await db.delete(cartTable)
-        .where(eq(cartTable.product_id, req.product_id))    
+        .where(eq(cartTable.product_id, req.product_id) || eq(cartTable.user_id, req.user_id)) 
         
         return NextResponse.json({ res })
     } catch (error) {

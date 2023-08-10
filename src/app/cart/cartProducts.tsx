@@ -18,7 +18,7 @@ interface IProduct {
         const userId = Cookies.get('user_id');
         // console.log(userId)
 
-        const res = await fetch('/api/cart', {
+        const res = await fetch('http://localhost:3000/api/cart', {
            method: 'GET',
            
         })
@@ -56,7 +56,7 @@ interface IProduct {
 
     // export const handleQuantity = async (quantity: number) => {
         // const cookieStore =  cookies()
-        const userId = Cookies.get('user_id');
+        // const userId = Cookies.get('user_id');
         // console.log(userId)
 
     //     const res = await fetch('http://localhost:3000/api/cart', {
@@ -71,6 +71,18 @@ interface IProduct {
         
     // }
     
+    export  const handleDelete = async (item: any) => {
+        
+        const userId = Cookies.get('user_id');
+
+        const res = await fetch('http://localhost:3000/api/cart', {
+            method: 'DELETE',
+            body: JSON.stringify({
+                product_id: item,
+                user_id: userId
+            }) 
+        } )
+    }
     
 
 
