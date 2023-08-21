@@ -4,13 +4,6 @@ import { v4 as uuid } from 'uuid'
 import { cookies } from "next/dist/client/components/headers"
 import { eq } from "drizzle-orm";
 
-export const OPTIONS = {
-    cors: {
-      origin: "https://dine-market-api-qasimrafiq2019-gmailcom.vercel.app/api/cart",
-    },
-  };
-
-
 export const  GET = async (request: NextRequest) => {
     const res = await db.select().from(cartTable)
     // console.log(res)
@@ -80,7 +73,7 @@ export const  PUT = async (request: NextRequest) => {
 }
 
 export const  DELETE = async (request: NextRequest) => {
-    const user_id = cookies().get('user_id')?.value
+    // const user_id = cookies().get('user_id')?.value
     const req = await request.json()
     try {
         const res = await db.delete(cartTable)
@@ -90,4 +83,5 @@ export const  DELETE = async (request: NextRequest) => {
     } catch (error) {
         
     }
+
 }

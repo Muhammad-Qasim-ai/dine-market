@@ -8,6 +8,9 @@ import { urlForImage } from "../../../sanity/lib/image"
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { LuShoppingCart } from "react-icons/lu"
 import {Cart } from './addtoCart'
+import { Toaster } from "react-hot-toast";
+import { IProduct } from "@/components/products";
+import Quantity from "./quantity";
 
 
 
@@ -37,16 +40,7 @@ export default async function Products({params}:{params: {products: string} }) {
         return res
         
     }
-    interface IProduct {
-        title: string,
-        category: string,
-        price: number,
-        image: IImage,
-        ref: string,
-        id: number,
-        _id: string
     
-    }
     // console.log(productData());
     
     const data: IProduct[] = await productData()
@@ -56,6 +50,10 @@ export default async function Products({params}:{params: {products: string} }) {
     return (
         <>
         
+            <Toaster 
+      position="top-center"
+      reverseOrder={true}
+      />
             <div className="mt-[6.8rem] mb-[5rem]">
                 {data.map((item: IProduct) => (
                     <div key={item.id} className="py-[4] xl:px-[8rem] md:px-[4rem] px-4">
@@ -85,11 +83,7 @@ export default async function Products({params}:{params: {products: string} }) {
                                 </div>
                                 <div className="flex gap-8">
                                     <h4 className="">Quantity: </h4>
-                                    <div className="flex items-center ">
-                                        <AiOutlineMinus className="mr-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] " />
-                                        <span className="">1</span>
-                                        <AiOutlinePlus className="ml-[10px] cursor-pointer bg-[#f1f1f1] rounded-[50%] p-1 w-[30px] h-[30px] border-2 border-black" />
-                                    </div>
+                                    <Quantity id={item._id} data={data}/>
 
                                 </div>
                                 <div className="flex items-center gap-4">

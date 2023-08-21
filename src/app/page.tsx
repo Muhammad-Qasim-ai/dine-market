@@ -6,6 +6,7 @@ import Products from '../components/products'
 import Designer from '../components/designer'
 import Letter from '../components/letter'
 import Footer from '../components/footer'
+import { Toaster } from 'react-hot-toast'
 
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
     <>
     
 
-   
+    
     <Hero />
     <Promo />
     <Products />

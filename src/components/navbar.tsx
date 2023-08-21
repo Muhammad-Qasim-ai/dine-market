@@ -12,23 +12,17 @@ import { RxOpenInNewWindow} from "react-icons/rx"
 import Link from 'next/link';
 import { productData, result } from '@/app/cart/cartProducts';
 import { IProduct } from './products';
+import CartContainer from '@/app/cart/cartContainer';
+import { useAppSelector } from '@/store/store';
 
 
 export default function Navbar() {
-    const [cartItems, setCartItems] = useState(0)
-    
-    useEffect(() => {
-        result.then((filteredProductId: any) => {
-          productData(filteredProductId).then((data) => {
-            const cartItems2 = data.length
-            // console.log(data.length)
-            setCartItems(cartItems2);
-          });
-        });
-      }, []);
+    const totalItems = useAppSelector((state) => state.cart.totalQuantity)
 
     return(
         <>
+        <CartContainer>
+            {({productData2}: {productData2: IProduct[], setProductData2: React.Dispatch<React.SetStateAction<IProduct[]>>, handleDelete2: any, handleDecQuantity: any, handleIncQuantity: any, totalSubtotal: number}) => (
         <div className="hidden h-10 xl:mx-32 my-8 mx-8  lg:flex justify-between items-center ">
             <Link href="./"><img src="./logo.jpg" alt="logo" className="" /></Link>
             
@@ -44,16 +38,16 @@ export default function Navbar() {
                 <input type="text" placeholder="What you looking for?" className=" text-xs" />
             </div>
             <a href={'/cart'} className="border  rounded-full w-12 p-3 bg-cartbg h-12 flex justify-center items-center font-bold">
-                <LuShoppingCart className={` text-3xl`} />
+                
+                    <LuShoppingCart className={` text-3xl`} />
             <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>
-                {cartItems == 0 ? (
-                    <span>0</span>
-                ) : (
-                    <span>{cartItems}</span>
-                )}
+                {productData2.length}
             </span>
+                
             </a>
         </div>
+        )}
+        </CartContainer>
         <MobileNav />
         </>
     )

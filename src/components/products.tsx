@@ -28,7 +28,8 @@ export interface IProduct {
     id: number,
     _id: string,
     ref: string,
-    quantity: any
+    quantity: number,
+    totalPrice: number
 
 }
 

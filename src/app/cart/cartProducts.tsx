@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import { client } from "../../../sanity/lib/client"
+import { toast } from "react-hot-toast";
 
 interface IProduct {
     title: string,
@@ -12,23 +13,23 @@ interface IProduct {
         
     }
     
-    let productData2: IProduct[] = [] 
+    // let productData2: IProduct[] = [] 
     const handleCart = async () => {
-        // const cookieStore =  cookies()
+        
         const userId = Cookies.get('user_id');
-        // console.log(userId)
+        
 
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('/api/cart', {
            method: 'GET',
            
         })
         const result = await res.json()
         
         const filteredOrders = result.res.filter((order: any) => order.user_id === userId)
-        // console.log(filteredOrders);
+        
         
         const filteredProductId = filteredOrders.map((item: any) => item.product_id)
-        // console.log(filteredProductId);
+        
         return filteredProductId
     }
     export const result: Promise<any> = handleCart();
@@ -53,35 +54,20 @@ interface IProduct {
        
     }
     
-
-    // export const handleQuantity = async (quantity: number) => {
-        // const cookieStore =  cookies()
-        // const userId = Cookies.get('user_id');
-        // console.log(userId)
-
-    //     const res = await fetch('http://localhost:3000/api/cart', {
-    //        method: 'PUT',
-    //        body: JSON.stringify({
-    //         quantity: quantity
-    //        })
-
-           
-    //     })
-    //     const result = await res.json()
-        
-    // }
     
     export  const handleDelete = async (item: any) => {
         
         const userId = Cookies.get('user_id');
 
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('/api/cart', {
             method: 'DELETE',
             body: JSON.stringify({
                 product_id: item,
                 user_id: userId
             }) 
+            
         } )
+        
     }
     
 

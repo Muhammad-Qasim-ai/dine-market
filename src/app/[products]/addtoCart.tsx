@@ -1,20 +1,35 @@
 'use client'
 
+import { IProduct } from "@/components/products";
+import { cartAction } from "@/store/features/cartSlice";
+import { useAppDispatch } from "@/store/store";
 import { FC } from "react";
+import { toast } from "react-hot-toast";
 import { LuShoppingCart } from "react-icons/lu";
 
-export const Cart: FC<{ item: any }> = ({item}) => {
-    
+export const Cart: FC<{ item: IProduct }> = ({item}) => {
+    async function onClickHandler() {
+        // Start both functions "simultaneously"
+        await Promise.all([addToCart(), handleAddToCart()]);
+        console.log("Both functions completed");
+      }
+    const dispatch = useAppDispatch();
+
+    const addToCart = () => {
+        dispatch(cartAction.addToCart({product: item, quantity: 1}))
+    }
+
     const handleAddToCart = async () => {
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('/api/cart', {
            method: 'POST',
            body: JSON.stringify({
                product_id: item._id,
            })
-    
+           
     
         })
-    
+        toast.success('Product Added Succesfully')
+        
         const result = await res.json()
         
         console.log(result);
@@ -22,7 +37,7 @@ export const Cart: FC<{ item: any }> = ({item}) => {
         
     }
     return (
-        <button onClick={handleAddToCart} className="w-[40%] p-3 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol tracking-wider">
+        <button onClick={onClickHandler} className="w-[40%] p-3 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol tracking-wider">
                                     <LuShoppingCart className='text-2xl' />
                                 Add to Cart</button>
     )

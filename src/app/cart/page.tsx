@@ -1,99 +1,60 @@
 "use client";
+
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { IProduct } from "@/components/products";
 import { useState, useEffect } from "react";
-import { productData, result, handleDelete } from "./cartProducts";
+// import { delete2 } from "./cartContainer";
 import { urlForImage } from "../../../sanity/lib/image";
 import Image from "next/image";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import toast, { Toaster } from "react-hot-toast";
+import CartContainer from "./cartContainer";
+import { useAppDispatch } from "@/store/store";
+import { cartAction } from "@/store/features/cartSlice";
 
 export default function Cart() {
-  const [productData2, setProductData2] = useState<IProduct[]>([]);
-  let [quantity, setQuantity] = useState(1)
-  const [isDeleting, setIsDeleting] = useState(false);
-  const subTotal = productData2.reduce((acc, item) => acc + item.price, 0);
-  
-
-  useEffect(() => {
-    result.then((filteredProductId: any) => {
-        // console.log(filteredProductId);
-        
-      productData(filteredProductId).then((data: IProduct[]) => {
-        // console.log(data);
-        const productsWithQuantity = data.map((product) => ({
-          ...product,
-          quantity: 1, // Initialize quantity to 1
-        }));
-        setProductData2(productsWithQuantity);
-        
-          
-      });
-    });
-  }, []);
-
-  console.log(productData2);
-  
-  const handleIncQuantity = (productId: string) => {
-    setProductData2((prevProducts) =>
-      prevProducts.map((product) =>
-        product._id === productId
-          ? { ...product, quantity: product.quantity + 1 }
-          : product
-      )
-    );
-  };
-
-  const handleDecQuantity = (productId: string) => {
-    setProductData2((prevProducts) =>
-      prevProducts.map((product) =>
-        product._id === productId && product.quantity > 1
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
-      )
-    );
-  };
-
-  const calculateTotalProductPrice = (item: IProduct) => {
-    return item.price * item.quantity;
-  };
-
-  const totalSubtotal = productData2.reduce((acc, item) => acc + calculateTotalProductPrice(item), 0);
-  
-  const handleDelete2 = async (productId: string) => {
-    try{
-      setIsDeleting(true);
-      handleDelete(productId)
-      await new Promise((resolve) => setTimeout(resolve, 3000))
-      setProductData2((prevProducts) =>
-        prevProducts.filter((product) => product._id !== productId) 
-      );
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    } finally {
-      setIsDeleting(false); // Set the deleting state back to false after the delay
+  const dispatch = useAppDispatch();
+       const delete2 = (productId: string) => {
+        dispatch(cartAction.removeProduct(productId))
     }
-  
-
-  }
-
-  
+    
 
   return (
-    <>
-      <div>
-        
+    <CartContainer>
+      {({productData2, setProductData2, handleDelete2, handleDecQuantity, handleIncQuantity, totalSubtotal, handleCheckout}: {productData2: IProduct[], setProductData2: React.Dispatch<React.SetStateAction<IProduct[]>>, handleDelete2: any, handleDecQuantity: any, handleIncQuantity: any, totalSubtotal: number, handleCheckout: any }) => {
 
-        <h2 className=" font-bold block text-[1.5em]  xl:mx-32 sm:mx-8 mx-4 lg:p-12 ">Shopping Cart</h2>
+        async function onClickHandler(product_id: any) {
+          // Start both functions "simultaneously"
+          await Promise.all([delete2(product_id), handleDelete2(product_id)]);
+          console.log("Both functions completed");
+        }
+        const [dataLoaded, setDataLoaded] = useState(false);
+        useEffect(() => {
+          // Simulate data fetching delay
+          setTimeout(() => {
+            setDataLoaded(true);
+          }, 1100);
+        }, []);
+        
+        return (
+      <div>
+      <Toaster 
+      position="top-center"
+      reverseOrder={true}
+      />
+        {dataLoaded ? (
+          <>
+          <h2 className=" font-bold block text-[1.5em]  xl:mx-32 sm:mx-8 mx-4 lg:p-12 ">Shopping Cart</h2>
         <div className="mb-16 xl:mx-32 sm:mx-8 mx-4 lg:p-12  flex md:flex-row flex-col justify-between">
           
           <div className="flex flex-col justify-between gap-16  -red-600 md:w-[60%] w-full">
             
 
             
-        {productData2.length === 0 ? (
-          <p>Loading...</p>
+        {productData2.length === 0 ? (  
+          <p>Your Cart Is Empty</p>
         ) : (
           productData2.map((item: IProduct) => {
           
@@ -116,7 +77,7 @@ export default function Cart() {
                   </h3>
                   <button className=" bg-transparent">
                     <RiDeleteBinLine onClick={() => handleDelete2(item._id)}  />
-                    {isDeleting === true && <div>Loading...</div>}
+                    {/* {isDeleting === true && <div>Loading...</div>} */}
                   </button>
                 </div>
                 <p className="leading-[16px] text-[#666] text-[1rem] font-[600]">
@@ -159,15 +120,25 @@ export default function Cart() {
           <span>{totalSubtotal}</span>
         </div>
                 <div className="flex space-between gap-16">
-                  <button className="w-full p-4 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol">
+                  <button onClick={handleCheckout} className="w-full p-4 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol">
                     Proccess to Checkout
                   </button>
                 </div>
               </div>
               
         </div>
+          </>
+        ): (
+          <>
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+    </div>
+          </>
+        )}
+        
        
       </div>
-    </>
+      )}}
+    </CartContainer>
   );
 }

@@ -2,12 +2,12 @@
 
 import './globals.css'
 import Navbar from '../components/navbar'
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
 import Footer from '../components/footer'
-import { Provider } from 'react-redux'
-import {store }from '@/store/store'
+import ReduxProvider from '@/components/utils/ReduxProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+
+// const inter = Inter({ subsets: ['latin'] })
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
@@ -21,10 +21,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <ReduxProvider>
     <html lang="en" className=''>
       {/* <Provider store={store}> */}
 
-      <body className={`${inter.className}`}>
+      <body>
       <Navbar />
         {children}
         <Footer />
@@ -32,5 +33,6 @@ export default function RootLayout({
       {/* </Provider> */}
       
     </html>
+    </ReduxProvider>
   )
 }
