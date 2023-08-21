@@ -18,18 +18,13 @@ interface IProduct {
         
         const userId = Cookies.get('user_id');
         
-
+        
         const res = await fetch('/api/cart', {
-           method: 'GET',
-           
+           method: 'GET',      
         })
         const result = await res.json()
-        
         const filteredOrders = result.res.filter((order: any) => order.user_id === userId)
-        
-        
         const filteredProductId = filteredOrders.map((item: any) => item.product_id)
-        
         return filteredProductId
     }
     export const result: Promise<any> = handleCart();

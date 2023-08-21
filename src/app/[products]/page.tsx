@@ -83,7 +83,7 @@ export default async function Products({params}:{params: {products: string} }) {
                                 </div>
                                 <div className="flex gap-8">
                                     <h4 className="">Quantity: </h4>
-                                    <Quantity id={item._id} data={data}/>
+                                    <Quantity id={item._id}/>
 
                                 </div>
                                 <div className="flex items-center gap-4">

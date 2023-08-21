@@ -5,10 +5,10 @@ import CartContainer from "../cart/cartContainer"
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { useState } from "react"
 
-export default function Quantity({id, data}: {id: string, data: IProduct[]}) {
+export default function Quantity({id}: {id: string}) {
     const [quan, setQuan] = useState(1)
     return(
-        <CartContainer quan={quan}>
+        <CartContainer quan={2}>
             {({handleIncQuantity, handleDecQuantity}: {handleIncQuantity: any, handleDecQuantity: any}) =>{
                 return(
                     <div className="flex items-center ">
