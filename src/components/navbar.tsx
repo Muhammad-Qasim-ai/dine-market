@@ -17,12 +17,17 @@ import { useAppSelector } from '@/store/store';
 
 
 export default function Navbar() {
-    const totalItems = useAppSelector((state) => state.cart.totalQuantity)
-
+    
+    
     return(
         <>
         <CartContainer>
-            {({productData2}: {productData2: IProduct[], setProductData2: React.Dispatch<React.SetStateAction<IProduct[]>>, handleDelete2: any, handleDecQuantity: any, handleIncQuantity: any, totalSubtotal: number}) => (
+            {({productData2}: {productData2: IProduct[]}) => {
+               
+                    
+              
+
+                return(
         <div className="hidden h-10 xl:mx-32 my-8 mx-8  lg:flex justify-between items-center ">
             <Link href="./"><img src="./logo.jpg" alt="logo" className="" /></Link>
             
@@ -41,14 +46,16 @@ export default function Navbar() {
                 
                     <LuShoppingCart className={` text-3xl`} />
             <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>
-                {productData2.length}
+                {productData2.length === 0 ? (<span>0</span>) : (<span>{productData2.length}</span>)}
             </span>
                 
             </a>
         </div>
-        )}
+
+                )
+            }}
         </CartContainer>
-        <MobileNav />
+<MobileNav />
         </>
     )
 }
@@ -59,9 +66,14 @@ function MobileNav(){
 
     return (
         <>
-        <div className='lg:hidden'>
+        <CartContainer>
+            {({productData2}: {productData2: IProduct[]}) => {
+
+
+                return(
+                    <div className='lg:hidden'>
             <div className='flex m-10 justify-between items-center'>
-            <img src="./logo.jpg" alt="logo" className="" />
+            <Link href="./"><img src="./logo.jpg" alt="logo" className="" /></Link>
             <button className='' onClick={() => setnavbar(!navbar)}>
                 {navbar ? (
                     <VscChromeClose className='text-3xl' />
@@ -80,22 +92,22 @@ function MobileNav(){
                    <a href='/male'>Male</a>
                    <a href='/kids'>Kids</a>
                    <a href='/all'>All Products</a>
-                   <button className="border  rounded-full w-12 p-3 bg-cartbg h-12 flex justify-center items-center font-bold">
+                   <a href={'/cart'} className="border  rounded-full w-12 p-3 bg-cartbg h-12 flex justify-center items-center font-bold">
                 <LuShoppingCart className={` text-3xl`} />
             <span className='text-xs absolute mb-4 text-center bg-red-500 rounded-full h-4 ml-4 w-3'>
-            {cartItems == 0 ? (
-                    <span>0</span>
-                ) : (
-                    <span>{cartItems}</span>
-                )}
+            {productData2.length}
             </span>
-            </button>
+            </a>
                </ul>     
                
                 )}
                 
             </div>
         </div>
+                )
+            }}
+        </CartContainer>
+        
 
         </>
     )

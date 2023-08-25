@@ -47,7 +47,7 @@ export const  POST = async (request: NextRequest) => {
     try {
         const res = await db.insert(cartTable).values({
             product_id: req.product_id,
-            quantity: 1,
+            quantity: req.quantity,
             user_id: cookies().get('user_id')?.value  as string
         }).returning();
         return NextResponse.json({ res })
@@ -61,7 +61,7 @@ export const  PUT = async (request: NextRequest) => {
     
     try {
         const res = await db.update(cartTable).set({
-            quantity: req.quantity, 
+            quantity: req.quantity + 1, 
             // product_id: req.product_id
         })
         .where(eq(cartTable.product_id, `${req.product_id}`) || eq(cartTable.user_id, `${user_id}`))

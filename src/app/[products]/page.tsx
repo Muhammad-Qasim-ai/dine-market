@@ -10,7 +10,7 @@ import { LuShoppingCart } from "react-icons/lu"
 import {Cart } from './addtoCart'
 import { Toaster } from "react-hot-toast";
 import { IProduct } from "@/components/products";
-import Quantity from "./quantity";
+// import Quantity from "./quantity";
 
 
 
@@ -81,15 +81,7 @@ export default async function Products({params}:{params: {products: string} }) {
                                         <li className="w-[40px] h-[40px] flex justify-center items-center rounded-[50%] cursor-pointer text-[#666] text-[1rem]">XL</li>
                                     </ul>
                                 </div>
-                                <div className="flex gap-8">
-                                    <h4 className="">Quantity: </h4>
-                                    <Quantity id={item._id}/>
-
-                                </div>
-                                <div className="flex items-center gap-4">
                                 <Cart item={item} />
-                        <p className="  font-[700] text-[1.5rem] leading-[30px] tracking-[0.1em]">${item.price}.00</p>
-                                </div>
                             </div>
                         </div>
                         

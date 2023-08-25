@@ -28,4 +28,7 @@
     }
   }
 
-
+.product-card{
+    transform: scale(5);
+    transition: transform .5s ease;
+}

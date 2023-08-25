@@ -12,6 +12,12 @@ interface IProduct {
         _id: string
         
     }
+    interface IData {
+    id: number,
+    user_id: string,
+    product_id: string,
+     quantity: number
+}
     
     // let productData2: IProduct[] = [] 
     const handleCart = async () => {
@@ -19,13 +25,18 @@ interface IProduct {
         const userId = Cookies.get('user_id');
         
         
-        const res = await fetch('/api/cart', {
+        const res = await fetch('https://dine-market-qasim-qasimrafiq2019-gmailcom.vercel.app/api/cart', {
            method: 'GET',      
         })
         const result = await res.json()
         const filteredOrders = result.res.filter((order: any) => order.user_id === userId)
-        const filteredProductId = filteredOrders.map((item: any) => item.product_id)
-        return filteredProductId
+        console.log(filteredOrders);
+        
+        const cartItems = filteredOrders.map((item: IData) => ({
+            product_id: item.product_id,
+            quantity: item.quantity,
+          }));
+          return cartItems;
     }
     export const result: Promise<any> = handleCart();
 

@@ -6,17 +6,22 @@ import { handleDelete, productData, result } from './cartProducts';
 import toast from 'react-hot-toast';
 import getStripePromise from '@/lib/stripe'
 
-export default function CartContainer({ children, quan }: {children: any, quan: number}) {
+export default function CartContainer({ children, quan }: {children: any, quan?: number}) {
     const [productData2, setProductData2] = useState<IProduct[]>([]);
+    const [cartQuan, setCartQuan] = useState(0)
     useEffect(() => {
 
-        result.then((filteredProductId: any) => {                      
-          productData(filteredProductId).then(async (data: IProduct[]) => {           
+        result.then((cartItems: any) => {      
+          const productIds = cartItems.map((item: any) => item.product_id)
+          productData(productIds).then(async (data: IProduct[]) => {           
             try{
-              const productsWithQuantity = data.map((product) => ({
-                ...product,
-                quantity: quan,
-              }));
+              const productsWithQuantity = data.map((product) => {
+                const cartItem = cartItems.find((item: any) => item.product_id === product._id);
+                return{
+                  ...product,
+                  quantity: cartItem.quantity,
+                }
+              });
               
               setProductData2(productsWithQuantity)
                

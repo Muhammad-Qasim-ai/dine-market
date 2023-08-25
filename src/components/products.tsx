@@ -40,8 +40,8 @@ export default async function Products() {
 
     return (
         <>
-            <h1 className=" text-sm mb-2 text-center tracking-wider font-extrabold text-promo1 font-sora">PROMOTIONS</h1>
-                <h1 className=" tracking-wider text-center text-3xl font-extrabold ">Our Promotion Events</h1>
+            <h1 className=" text-sm mb-2 text-center tracking-wider font-extrabold text-promo1 font-sora">PRODUCTS</h1>
+                <h1 className=" tracking-wider text-center text-3xl font-extrabold ">Check What We Have</h1>
         
             <div className="flex overflow-x-scroll overflow-y-hidden xl:mx-28 lg:mx-2 3md:mx-7 mx-3   my-16 no-scrollbar gap-3">
                 
@@ -49,7 +49,7 @@ export default async function Products() {
                 
                 
                 data.map((item) => (
-                    <Link href={item.ref} key={item.id}  className="min-w-[100%] 4md:min-w-[50%] xl:min-w-[33%] h-[33rem]  flex flex-col items-center  overflow-y-hidden py-9 ">
+                    <Link href={item.ref} key={item.id}  className=" hover:scale-110 transition-[0.5s] ease-in min-w-[100%] 4md:min-w-[50%] xl:min-w-[33%] h-[33rem]  flex flex-col items-center  overflow-y-hidden py-9 ">
                         <Image 
                         src={urlForImage(item.image).url()} 
                         alt="product" 
