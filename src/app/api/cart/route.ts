@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import {db, cartTable} from '@/lib/drizzle'
 import { v4 as uuid } from 'uuid'
 import { cookies } from "next/dist/client/components/headers"
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 export const  GET = async (request: NextRequest) => {
     const res = await db.select().from(cartTable)
@@ -77,7 +77,7 @@ export const  DELETE = async (request: NextRequest) => {
     const req = await request.json()
     try {
         const res = await db.delete(cartTable)
-        .where(eq(cartTable.product_id, req.product_id) || eq(cartTable.user_id, req.user_id)) 
+        .where(and(eq(cartTable.product_id, req.product_id), eq(cartTable.user_id, req.user_id))) 
         
         return NextResponse.json({ res })
     } catch (error) {
