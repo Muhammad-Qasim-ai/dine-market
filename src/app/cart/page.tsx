@@ -1,10 +1,8 @@
 "use client";
 
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
+
 import { IProduct } from "@/components/products";
 import { useState, useEffect } from "react";
-// import { delete2 } from "./cartContainer";
 import { urlForImage } from "../../../sanity/lib/image";
 import Image from "next/image";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -12,15 +10,10 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BiShoppingBag } from "react-icons/bi";
 import toast, { Toaster } from "react-hot-toast";
 import CartContainer from "./cartContainer";
-import { useAppDispatch } from "@/store/store";
-import { cartAction } from "@/store/features/cartSlice";
 
 export default function Cart() {
-  
-
   const [dataLoaded, setDataLoaded] = useState(false);
   useEffect(() => {
-    // Simulate data fetching delay
     setTimeout(() => {
       setDataLoaded(true);
     }, 2000);
@@ -59,8 +52,10 @@ export default function Cart() {
                     <>
                       {productData2.length === 0 ? (
                         <div className="flex flex-col justify-center items-center">
-                          <BiShoppingBag className="w-[9.375rem] h-[9.375rem]"/>
-                          <h1 className="text-[2em] font-bold">Your shopping bag is empty</h1>
+                          <BiShoppingBag className="w-[9.375rem] h-[9.375rem]" />
+                          <h1 className="text-[2em] font-bold">
+                            Your shopping bag is empty
+                          </h1>
                         </div>
                       ) : (
                         productData2.map((item: IProduct) => {
@@ -127,8 +122,8 @@ export default function Cart() {
                   ) : (
                     <>
                       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
-    </div>
+                        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+                      </div>
                     </>
                   )}
                 </div>
