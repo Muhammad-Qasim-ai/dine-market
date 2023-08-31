@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Designer() {
   return (
     <>
@@ -59,9 +61,9 @@ export default function Designer() {
                 The Natural color is the actual natural color of the fiber,
                 undyed and 100% traceable.
               </p>
-              <button className="w-[16rem] p-3 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol tracking-wider">
+              <Link href={'./all'} className="w-[16rem] p-3 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol tracking-wider">
                 See All Products
-              </button>
+              </Link>
             </div>
           </div>
         </div>

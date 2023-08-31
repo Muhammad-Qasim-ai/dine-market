@@ -17,7 +17,7 @@ export default function Image2({ item }: { item: any }) {
             onClick={() => setData(item.image)}
           />
           <img
-            className={`h-[60px] min-w-[60px] md:min-w-[100px] md:h-[100px] cursor-pointer ${
+            className={`h-[60px] min-w-[60px] md:min-w-[100px] md:h-[100px] cursor-pointer ${ 
               urlForImage(item.image).url() === urlForImage(item.image2).url()
                 ? "opacity-0"
                 : "opacity-100"

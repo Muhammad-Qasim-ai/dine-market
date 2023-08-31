@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LuShoppingCart } from "react-icons/lu";
 
 export default function Hero() {
@@ -16,10 +17,10 @@ export default function Hero() {
               Anyone can beat you but no one can beat your outfit as long as you
               wear Dine outfits.
             </p>
-            <button className="w-64 2md:w-4/12 p-4 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol">
+            <Link href={'./all'} className="w-64 2md:w-4/12 p-4 text-base font-semibold bg-startbg flex items-center justify-center gap-2 text-startcol">
               <LuShoppingCart className="text-2xl" />
               Start Shopping
-            </button>
+            </Link>
           </div>
           <div className="flex flex-wrap gap-4 mt-14 mb-20 ">
             <img src="/bazaar.jpg" alt="" />

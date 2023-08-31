@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+
 
 export default function Promo() {
   return (
@@ -25,11 +27,11 @@ export default function Promo() {
               </div>
 
               <Image
-                width={"260"}
+                width={"290"}
                 height={"300"}
                 src="/promo1.jpg"
                 alt=""
-                className="h-52"
+                className="h-44 2sm:h-52"
               />
             </div>
             <div className=" h-52 w-full flex justify-center flex-col bg-promobg2 text-startcol items-center">
@@ -42,31 +44,32 @@ export default function Promo() {
               </div>
             </div>
           </div>
+          
           <div className="flex 3md:flex-row flex-col items-center gap-4 justify-center lg-justify-normal">
-            <div className="flex flex-col  w-72 bg-promobg3">
+            <Link href={'./flexSweatShirt'} className="flex flex-col  w-72 bg-promobg3">
               <h1 className="pt-6 ml-6">Flex Sweatshirt</h1>
               <div className="flex">
                 <div className="ml-6">
-                  $100.00
+                  $256.00
                   <div className=" w-16 -mt-0.85 border-opacity-70 border-black border"></div>
                 </div>
-                <p className="ml-2 font-bold">$256.00</p>
+                <p className="ml-2 font-bold">$175.00</p>
               </div>
 
               <Image width={"280"} height={"340"} src="/promo2.jpg" alt="" />
-            </div>
-            <div className="flex flex-col  w-72 bg-promobg1 ">
+            </Link>
+            <Link href={'./flexPushButtonBomber'} className="flex flex-col  w-72 bg-promobg1 ">
               <h1 className="pt-6 ml-6">Flex Push Button Bomber</h1>
               <div className="flex">
                 <div className="ml-6">
-                  $100.00
+                  $256.00
                   <div className=" w-16 -mt-0.85 border-opacity-70 border-black border"></div>
                 </div>
-                <p className="ml-2 font-bold">$256.00</p>
+                <p className="ml-2 font-bold">$225.00</p> 
               </div>
 
               <Image width={"280"} height={"340"} src="/promo3.jpg" alt="" />
-            </div>
+            </Link>
           </div>
         </div>
       </div>
